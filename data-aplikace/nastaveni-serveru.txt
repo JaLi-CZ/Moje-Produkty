@@ -1,0 +1,3 @@
+zapnout-program-po-spusteni-pocitace: ano
+port: 8081
+zapnout-server-po-spusteni-programu: ano

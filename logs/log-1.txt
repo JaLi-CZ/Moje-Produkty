@@ -1,0 +1,8 @@
+Tento výpisový soubor byl vytvořen středu 13. července 2022 v 17:15:25
+17:15:25 [Varování]: © 2022 Všechna práva vyhrazena společností jalicz.com!
+17:15:25 [Info]: Spouštím aplikaci "Moje Produkty" (verze 1.1.0)...
+17:15:25 [Chyba]: Něco se pokazilo při čtení všech řádků souboru "C:\Users\jalic\Desktop\Coding\Java\MojeProduktyApp\data-aplikace\vyrobci.txt".
+- Název chyby: FileNotFoundException
+- Podrobnosti: data-aplikace\vyrobci.txt (Systém nemůže nalézt uvedený soubor)
+17:15:26 [Info]: Otevírám hlavní okno aplikace...
+17:15:27 [Info]: Spustil jsem webový server na portu '8081'.
