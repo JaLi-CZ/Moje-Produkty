@@ -36,6 +36,17 @@ public class SearchEngine {
         return false;
     }
 
+    public static ArrayList<Produkt> getAllItems() {
+        final File[] files = FileManager.getItemFiles();
+        final ArrayList<Produkt> items = new ArrayList<>();
+        for(File file: files) {
+            final Produkt produkt = FileManager.readProdukt(file);
+            if(produkt == null) continue;
+            items.add(produkt);
+        }
+        return items;
+    }
+
     public static SearchResult search(SearchRequest request) {
         final String password = getPassword();
         if(password != null && !password.isEmpty()) {
@@ -47,13 +58,7 @@ public class SearchEngine {
                         "Pokud jste správcem Vy, v počítačové aplikaci ho lze změnit (Menu > Nastavení serveru > Požadovat heslo: ANO > Heslo)", null);
             }
         }
-        final File[] files = FileManager.getItemFiles();
-        final ArrayList<Produkt> items = new ArrayList<>();
-        for(File file: files) {
-            final Produkt produkt = FileManager.readProdukt(file);
-            if(produkt == null) continue;
-            items.add(produkt);
-        }
+        final ArrayList<Produkt> items = getAllItems();
 
         final SkladovyObjekt root = createItemTree(items);
 
@@ -61,15 +66,39 @@ public class SearchEngine {
         return null;
     }
 
-    private static Produkt getItemById(ArrayList<Produkt> items, int id) {
-        for(Produkt item: items) if(item.id == id) return item;
+    private static <T extends Produkt> T getItemById(ArrayList<T> items, int id) {
+        for(T item: items) if(item.id == id) return item;
         return null;
     }
 
     // returns the root skladovy-objekt
-    private static SkladovyObjekt createItemTree(ArrayList<Produkt> items) {
+    public static SkladovyObjekt createItemTree(ArrayList<Produkt> items) {
         final SkladovyObjekt root = new SkladovyObjekt(0, null, -1, -1, null, null, null, null);
-        // FIX IMPLEMENT THIS
+        final ArrayList<SkladovyObjekt> skObjs = new ArrayList<>();
+        final ArrayList<Produkt> things = new ArrayList<>();
+        for(Produkt p: items) {
+            if(p.type == TypeID.PRODUKT || p.type == TypeID.POTRAVINA) things.add(p);
+            else if(p.type == TypeID.SKLADOVY_OBJEKT) skObjs.add((SkladovyObjekt) p);
+        }
+        for(Produkt p: things) {
+            if(p.parentId < 1) root.items.add(p);
+            else {
+                final SkladovyObjekt parent = getItemById(skObjs, p.parentId);
+                if(parent != null) parent.items.add(p);
+                else Log.warn("Předmět '" + p.name + "' s ID '" + p.id + "' má špatně zapsané ID nadřazeného skl. objektu ('" + p.parentId +
+                        "'), žádný takový totiž neexistuje.");
+            }
+        }
+        for(SkladovyObjekt s: skObjs) {
+            if(s.parentId < 1) root.items.add(s);
+            else {
+                final SkladovyObjekt parent = getItemById(skObjs, s.parentId);
+                if(parent != null) parent.items.add(s);
+                else Log.warn("Skladový objekt '" + s.name + "' s ID '" + s.id + "' má špatně zapsané ID nadřazeného skl. objektu ('" + s.parentId +
+                        "'), žádný takový totiž neexistuje.");
+            }
+        }
+        root.updateContainedItemsData();
         return root;
     }
 

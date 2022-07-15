@@ -1,7 +1,12 @@
 package com.jalicz.MojeProduktyApp;
 
 import com.jalicz.MojeProduktyApp.GUI.frames.MenuFrame;
+import com.jalicz.MojeProduktyApp.files.FileManager;
 import com.jalicz.MojeProduktyApp.files.Log;
+import com.jalicz.MojeProduktyApp.files.search.SearchEngine;
+import com.jalicz.MojeProduktyApp.model.Produkt;
+import com.jalicz.MojeProduktyApp.model.SkladovyObjekt;
+import com.jalicz.MojeProduktyApp.model.TypeID;
 
 public class Start {
 

@@ -1,0 +1,18 @@
+Tento výpisový soubor byl vytvořen pátek 15. července 2022 v 16:16:10
+16:16:10 [Varování]: © 2022 Všechna práva vyhrazena společností jalicz.com!
+16:16:10 [Info]: Spouštím aplikaci "Moje Produkty" (verze 1.1.0)...
+16:16:10 [Chyba]: Něco se pokazilo při čtení všech řádků souboru "C:\Users\jalic\Desktop\Coding\Java\MojeProduktyApp\data-aplikace\vyrobci.txt".
+- Název chyby: FileNotFoundException
+- Podrobnosti: data-aplikace\vyrobci.txt (Systém nemůže nalézt uvedený soubor)
+16:16:11 [Info]: Otevírám hlavní okno aplikace...
+16:16:13 [Info]: Spustil jsem webový server na portu '8081'.
+16:16:33 [Info]: Skladový objekt 'mistnost' s ID #1 byl přidán do databáze :).
+16:16:44 [Info]: Skladový objekt 'krabice' s ID #2 byl přidán do databáze :).
+16:16:57 [Info]: Skladový objekt 'boxik' s ID #3 byl přidán do databáze :).
+16:17:12 [Info]: Skladový objekt 'krjaic chleba' s ID #4 byl přidán do databáze :).
+16:18:07 [Info]: Produkt 'vajicko' s ID #4 byl přidán do databáze :).
+16:18:07 [Info]: Nový výrobce předmětů 'Slepice' byl zapsán do souboru 'vyrobci.txt'.
+16:18:23 [Info]: Produkt 'chleba' s ID #5 byl přidán do databáze :).
+16:18:23 [Info]: Nový výrobce předmětů 'Pekar' byl zapsán do souboru 'vyrobci.txt'.
+16:18:50 [Info]: Produkt 'ryze' s ID #6 byl přidán do databáze :).
+16:18:50 [Info]: Nový výrobce předmětů 'Cinan' byl zapsán do souboru 'vyrobci.txt'.

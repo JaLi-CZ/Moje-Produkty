@@ -29,7 +29,7 @@ public class SearchRequest {
 
     public final boolean valid;
     public String password = null, text = "";
-    public int[] searchItemValues = new int[]{ SEARCH_NAME, SEARCH_ID, SEARCH_MANUFACTURER, SEARCH_REGISTRATION_DATE, SEARCH_EXPIRATION_DATE };
+    public int[] searchItemValues = new int[]{ SEARCH_NAME, SEARCH_ID, SEARCH_MANUFACTURER, SEARCH_REGISTRATION_DATE, SEARCH_NOTES, SEARCH_EXPIRATION_DATE };
     public int orderId = 0;
     public int maxResults = -1;
     public Filters filters = new Filters();
@@ -50,7 +50,7 @@ public class SearchRequest {
                     case "order" -> orderId = Integer.parseInt(value);
                     case "search-in" -> {
                         final String[] searchPartsStr = value.split(",");
-                        ArrayList<Integer> searchParts = new ArrayList<>();
+                        final ArrayList<Integer> searchParts = new ArrayList<>();
                         for(String partStr: searchPartsStr) {
                             int part = Integer.parseInt(partStr);
                             if(part >= SEARCH_NAME && part <= SEARCH_EXPIRATION_DATE) searchParts.add(part);

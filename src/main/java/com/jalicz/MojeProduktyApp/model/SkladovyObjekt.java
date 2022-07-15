@@ -15,9 +15,11 @@ public class SkladovyObjekt extends Produkt {
         notes
      */
 
-    public ArrayList<Produkt> items;
+    public ArrayList<Produkt> items = new ArrayList<>();
     public int totalItemsCount, produktyCount, potravinyCount, skladoveObjektyCount;
+    public int totalSubItemsCount, subProduktyCount, subPotravinyCount, subSkladoveObjektyCount;
     public int totalItemsWeight, foodContentWeight;
+    public int totalSubItemsWeight, subFoodContentWeight;
 
     public SkladovyObjekt(int id, String name, int parentId, int weight, LocalDateTime registration, String registrationString,
                           ArrayList<String> notes, String notesString) {
@@ -26,11 +28,14 @@ public class SkladovyObjekt extends Produkt {
         this.type = TypeID.SKLADOVY_OBJEKT;
     }
 
-    public void setContainedItems(ArrayList<Produkt> items) {
-        this.items = items;
-
-        int totalItemsCount = 0, produktyCount = 0, potravinyCount = 0, skladoveObjektyCount = 0;
-        int totalItemsWeight = 0, foodContentWeight = 0;
+    // updates all the contained items statistics, even subItems, subSubItems etc.
+    public void updateContainedItemsData() {
+        totalItemsCount = 0;            totalSubItemsCount = 0;
+        produktyCount = 0;              subProduktyCount = 0;
+        potravinyCount = 0;             subPotravinyCount = 0;
+        skladoveObjektyCount = 0;       subSkladoveObjektyCount = 0;
+        totalItemsWeight = 0;           totalSubItemsWeight = 0;
+        foodContentWeight = 0;          subFoodContentWeight = 0;
 
         for(Produkt produkt: items) {
             totalItemsCount++;
@@ -39,18 +44,29 @@ public class SkladovyObjekt extends Produkt {
             switch (produkt.type) {
                 case TypeID.PRODUKT -> produktyCount++;
                 case TypeID.POTRAVINA -> {
-                    Potravina potravina = (Potravina) produkt;
+                    final Potravina potravina = (Potravina) produkt;
                     potravinyCount++;
                     foodContentWeight += potravina.foodWeight;
                 }
-                case TypeID.SKLADOVY_OBJEKT -> skladoveObjektyCount++;
+                case TypeID.SKLADOVY_OBJEKT -> {
+                    final SkladovyObjekt s = (SkladovyObjekt) produkt;
+                    s.updateContainedItemsData();
+                    skladoveObjektyCount++;
+
+                    totalSubItemsCount += s.totalSubItemsCount;
+                    subProduktyCount += s.subProduktyCount;
+                    subPotravinyCount += s.subPotravinyCount;
+                    subSkladoveObjektyCount += s.subSkladoveObjektyCount;
+                    totalSubItemsWeight += s.totalSubItemsWeight;
+                    subFoodContentWeight += s.subFoodContentWeight;
+                }
             }
         }
-        this.totalItemsCount = totalItemsCount;
-        this.produktyCount = produktyCount;
-        this.potravinyCount = potravinyCount;
-        this.skladoveObjektyCount = skladoveObjektyCount;
-        this.totalItemsWeight = totalItemsWeight;
-        this.foodContentWeight = foodContentWeight;
+        totalSubItemsCount += totalItemsCount;
+        subProduktyCount += produktyCount;
+        subPotravinyCount += potravinyCount;
+        subSkladoveObjektyCount += skladoveObjektyCount;
+        totalSubItemsWeight += totalItemsWeight;
+        subFoodContentWeight += foodContentWeight;
     }
 }
