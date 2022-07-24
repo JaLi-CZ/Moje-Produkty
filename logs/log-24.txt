@@ -1,0 +1,7 @@
+Tento výpisový soubor byl vytvořen neděli 24. července 2022 v 15:24:15
+15:24:15 [Varování]: © 2022 Všechna práva vyhrazena společností jalicz.com!
+15:24:15 [Info]: Spouštím aplikaci "Moje Produkty" (verze 1.1.0)...
+15:24:15 [Info]: Otevírám hlavní okno aplikace...
+15:24:17 [Info]: Spustil jsem webový server na portu '8081'.
+15:24:27 [Chyba]: Spravovat předmět: Bylo zadáno špatné ID předmětu. Pouze předměty, který existují, je možné spravovat.
+15:24:30 [Chyba]: Spravovat předmět: Bylo zadáno špatné ID předmětu. Pouze předměty, který existují, je možné spravovat.
