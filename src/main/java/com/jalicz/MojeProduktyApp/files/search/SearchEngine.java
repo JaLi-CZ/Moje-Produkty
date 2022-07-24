@@ -36,6 +36,16 @@ public class SearchEngine {
         return false;
     }
 
+    public static Produkt getProdukt(int id) {
+        File file = null;
+        for(File f: FileManager.getItemFiles()) if(f.getName().startsWith(id+"")) {
+            file = f;
+            break;
+        }
+        if(file == null) return null;
+        return FileManager.readProdukt(file);
+    }
+
     public static ArrayList<Produkt> getAllItems() {
         final File[] files = FileManager.getItemFiles();
         final ArrayList<Produkt> items = new ArrayList<>();

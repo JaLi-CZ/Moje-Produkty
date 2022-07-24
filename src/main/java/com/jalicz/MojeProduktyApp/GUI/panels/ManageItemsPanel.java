@@ -6,6 +6,7 @@ import com.jalicz.MojeProduktyApp.GUI.components.Text;
 import com.jalicz.MojeProduktyApp.GUI.components.TextField;
 import com.jalicz.MojeProduktyApp.GUI.components.Button;
 import com.jalicz.MojeProduktyApp.GUI.frames.AddItemErrorFrame;
+import com.jalicz.MojeProduktyApp.GUI.frames.EnterItemIDFrame;
 import com.jalicz.MojeProduktyApp.GUI.frames.ManageItemsSettingsFrame;
 import com.jalicz.MojeProduktyApp.GUI.frames.ManageNotesFrame;
 import com.jalicz.MojeProduktyApp.files.Log;
@@ -21,6 +22,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +41,8 @@ public class ManageItemsPanel extends Panel {
 
     private static final String[]
             actions = new String[]{"Přidat předmět", "Spravovat předmět"},
-            itemTypes = new String[]{"Produkt", "Potravina", "Skladový objekt"};
+            itemTypes = new String[]{"Produkt", "Potravina", "Skladový objekt"},
+            enterButtonTexts = new String[]{"Přidat do databáze", "Potrvdit změny"};
 
     private static final ArrayList<String> manufacturers = FileManager.getManufacturers();
 
@@ -57,7 +61,7 @@ public class ManageItemsPanel extends Panel {
         final Panel itemExpirationDatePanel;
         final TextField itemExpirationDay, itemExpirationMonth, itemExpirationYear;
 
-        final Button addItemToDB, clearAll, settings;
+        final Button enterChanges, clearAll, settings;
 
         final Panel actionPanel; // Co chcete udělat? + (Typ předmětu / Zadejte ID předmětu)
         {
@@ -146,12 +150,12 @@ public class ManageItemsPanel extends Panel {
             {
                 buttonsPanel = new Panel(new GridLayout(1, 3, 8, 8));
 
-                addItemToDB = new Button("Přidat do databáze");
+                enterChanges = new Button(enterButtonTexts[0]);
                 clearAll = new Button("Smazat vše");
                 settings = new Button("Nastavení");
 
-                addItemToDB.setForeground(correctColor);
-                addItemToDB.setBorder(new LineBorder(correctColor, 1));
+                enterChanges.setForeground(correctColor);
+                enterChanges.setBorder(new LineBorder(correctColor, 1));
 
                 clearAll.setForeground(wrongColor);
                 clearAll.setBorder(new LineBorder(wrongColor, 1));
@@ -161,7 +165,7 @@ public class ManageItemsPanel extends Panel {
 
                 buttonsPanel.add(settings);
                 buttonsPanel.add(clearAll);
-                buttonsPanel.add(addItemToDB);
+                buttonsPanel.add(enterChanges);
             }
 
             formPanel.add(itemNameAndID);
@@ -442,6 +446,56 @@ public class ManageItemsPanel extends Panel {
 
         // Function and logic Listeners
         {
+            whatToDo.comboBox.addItemListener(e -> {
+                if(e.getStateChange() == ItemEvent.SELECTED) {
+                    String item = (String) e.getItem();
+                    if(item.equals(actions[0])) { // Přidat předmět
+                        enterChanges.setText(enterButtonTexts[0]);
+                        clearAll.setVisible(true);
+                        settings.setVisible(true);
+                    } else if(item.equals(actions[1])) { // Spravovat předmět
+                        new EnterItemIDFrame() {
+                            @Override
+                            public void onIDEntered(int id) {
+                                if(id == -1) {
+                                    whatToDo.comboBox.setSelectedItem(actions[0]);
+                                    return;
+                                }
+                                clearAll.doClick();
+                                clearAll.setVisible(false);
+                                settings.setVisible(false);
+                                enterChanges.setText(enterButtonTexts[1]);
+
+                                Produkt produkt = SearchEngine.getProdukt(id);
+                                if(produkt == null) {
+                                    Log.warn("Spravovat předmět: Zadaný produkt " + id + " neobsahuje žádné hodnoty.");
+                                    return;
+                                }
+
+                                int typeIndex = produkt.type-1;
+                                if(typeIndex >= 0) itemType.comboBox.setSelectedItem(itemTypes[typeIndex]);
+                                itemName.textField.setText(produkt.name);
+                                itemID.textField.setText(produkt.id+"");
+                                itemParentID.textField.setText(produkt.parentId == -1 ? "" : produkt.parentId+"");
+                                itemWeight.textField.setText(produkt.weight == -1 ? "" : produkt.weight+"");
+                                if(produkt.type != TypeID.SKLADOVY_OBJEKT) itemManufacturer.textField.setText(produkt.manufacturer == null ? "":produkt.manufacturer);
+                                currentNotes = produkt.notes;
+
+                                if(produkt.type == TypeID.POTRAVINA) {
+                                    Potravina p = (Potravina) produkt;
+                                    itemFoodPartWeight.textField.setText(p.foodWeight == -1 ? "":p.foodWeight+"");
+                                    if(p.expiration != null) {
+                                        itemExpirationDay.textField.setText(p.expiration.getDayOfMonth()+"");
+                                        itemExpirationMonth.textField.setText(p.expiration.getMonthValue()+"");
+                                        itemExpirationYear.textField.setText(p.expiration.getYear()+"");
+                                    }
+                                }
+                            }
+                        };
+                    }
+                }
+            });
+
             itemType.comboBox.addItemListener(e -> {
                 String item = (String) e.getItem();
                 if(item.equals(itemTypes[0])) { // Produkt
@@ -463,7 +517,7 @@ public class ManageItemsPanel extends Panel {
 
             manageNotes.addActionListener(e -> new ManageNotesFrame(this));
 
-            addItemToDB.addActionListener(e -> {
+            enterChanges.addActionListener(e -> {
                 ArrayList<String> errors = new ArrayList<>();
 
                 final int type = getItemTypeBySelectedString((String) itemType.comboBox.getSelectedItem());

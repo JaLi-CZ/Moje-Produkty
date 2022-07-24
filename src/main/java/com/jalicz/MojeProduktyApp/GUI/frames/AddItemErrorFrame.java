@@ -30,11 +30,13 @@ public class AddItemErrorFrame extends Frame {
         final StringBuilder builder = new StringBuilder();
         for(String error: errors) builder.append("- ").append(error).append("\n");
 
+        area.setEditable(false);
         area.setText(builder.toString());
         area.setFont(Frame.getFont(0.8));
         area.setBackground(Color.BLACK);
         area.setForeground(Color.RED);
         area.setLineWrap(true);
+        area.setPreferredSize(new Dimension(getWidth(), 250));
 
         final Button ok = new Button("Dobře, pokusím se.");
 
