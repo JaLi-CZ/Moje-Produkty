@@ -93,10 +93,8 @@ public class Filters {
     }
 
     // checks if an Produkt meets all the filters in this class instance
-    public boolean isMeetingAllFilters(Map.Entry<Produkt, Integer> entry) {
-        final Produkt p = entry.getKey();
-
-        if(entry.getValue() < minRelevancyPoints) return false;
+    public boolean isMeetingAllFilters(Produkt p, int points) {
+        if(points < minRelevancyPoints) return false;
 
         boolean hasType = false;
         for(int type: itemTypes) {

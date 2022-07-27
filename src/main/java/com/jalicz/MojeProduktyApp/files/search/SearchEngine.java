@@ -9,8 +9,23 @@ import com.jalicz.MojeProduktyApp.model.TypeID;
 import com.jalicz.MojeProduktyApp.response.MPCode;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
+
+class RatedProdukt implements Comparable<RatedProdukt> {
+
+    public final int points;
+    public final Produkt produkt;
+
+    public RatedProdukt(int points, Produkt produkt) {
+        this.points = points;
+        this.produkt = produkt;
+    }
+
+    @Override
+    public int compareTo(RatedProdukt o) {
+        return Integer.compare(points, o.points);
+    }
+}
 
 public class SearchEngine {
 
@@ -58,6 +73,12 @@ public class SearchEngine {
     }
 
     public static SearchResult search(SearchRequest request) {
+        if(!request.valid) {
+            Log.warn("Někdo se zeptal serveru neplatným příkazem: " + request.cmd + ". Všechny příkazy musí začínat '" + SearchRequest.prefix + "'.");
+            return new SearchResult(MPCode.INVALID_REQUEST_COMMAND, "Všechny dotazovací příkazy musí začínat '" + SearchRequest.prefix + "'.",
+                    "K této chybě by za normálních okolností docházet nemělo. Tento příkaz by za Vás JavaScript běžící ve Vašem prohlížeči měl" +
+                            " vyřešit za Vás.", null);
+        }
         final String password = getPassword();
         if(password != null && !password.isEmpty()) {
             if(request.password == null || !request.password.equals(password)) { // if incorrect password
@@ -68,12 +89,45 @@ public class SearchEngine {
                         "Pokud jste správcem Vy, v počítačové aplikaci ho lze změnit (Menu > Nastavení serveru > Požadovat heslo: ANO > Heslo)", null);
             }
         }
+
         final ArrayList<Produkt> items = getAllItems();
 
-        final SkladovyObjekt root = createItemTree(items);
+        final ArrayList<Map.Entry<Produkt, Integer>> resultMap = new ArrayList<>();
+        final Comparator<Map.Entry<Produkt, Integer>> comparator = OrderResults.getById(request.orderId).comparator;
 
-        // FIX DODELAT
-        return null;
+        final SkladovyObjekt root = createItemTree(items);
+        deepSearch(root, resultMap, request);
+
+        resultMap.sort(comparator);
+
+        final ArrayList<Produkt> result = new ArrayList<>();
+        final boolean limitResults = request.maxResults >= 0;
+        int i = 0;
+        for(Map.Entry<Produkt, Integer> entry: resultMap) {
+            if(limitResults && ++i > request.maxResults) break;
+            result.add(entry.getKey());
+        }
+
+        if(result.isEmpty()) return new SearchResult(MPCode.NO_ITEM_FOUND, "Žádné výsledky.",
+                "Nebyly nalezeny žádné výsledky, které by splňovaly všechny Vaše požadavky.", null);
+
+        return new SearchResult(MPCode.SUCCESS, "Bylo nalezeno " + result.size() + " výsledků.", "Bylo prohledáno " +
+                root.totalItemsCount + " položek, z toho jich " + (root.totalItemsCount - result.size()) + " nesplňovalo filtry.", result);
+    }
+
+    private static int getPoints(Produkt produkt, String searchText, int[] searchParts) {
+        return 3;
+    }
+
+    private static void deepSearch(SkladovyObjekt o, ArrayList<Map.Entry<Produkt, Integer>> resultMap, SearchRequest request) {
+        for(Produkt p: o.items) {
+            final int points = getPoints(p, request.text, request.searchItemValues);
+            if(p.id > 0 && request.filters.isMeetingAllFilters(p, points)) resultMap.add(Map.entry(p, points));
+            if(p.type == TypeID.SKLADOVY_OBJEKT) {
+                SkladovyObjekt ob = (SkladovyObjekt) p;
+                deepSearch(ob, resultMap, request);
+            }
+        }
     }
 
     private static <T extends Produkt> T getItemById(ArrayList<T> items, int id) {

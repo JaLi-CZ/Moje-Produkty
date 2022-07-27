@@ -25,7 +25,7 @@ public class SearchRequest {
             SEARCH_FOOD_WEIGHT = 8,
             SEARCH_EXPIRATION_DATE = 9;
 
-    private static final String prefix = "MP:";
+    public static final String prefix = "MP:";
 
     public final boolean valid;
     public String password = null, text = "";
@@ -33,8 +33,10 @@ public class SearchRequest {
     public int orderId = 0;
     public int maxResults = -1;
     public Filters filters = new Filters();
+    public final String cmd;
 
     public SearchRequest(String requestCommand) {
+        this.cmd = requestCommand;
         valid = requestCommand.startsWith(prefix);
         if(!valid) return;
         requestCommand = requestCommand.substring(prefix.length());

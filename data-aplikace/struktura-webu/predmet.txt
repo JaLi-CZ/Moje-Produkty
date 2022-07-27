@@ -1,21 +1,3 @@
-<!-- © All right reserved by jalicz.com -->
-<!-- © Všechna práva vyhrazena společností jalicz.com -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Moje Produkty</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="top-panel">
-        <div class="app-info">
-            <h1>Moje Produkty</h1>
-            <h2>verze 1.1.0</h2>
-        </div>
-    </div>
-
-    <div class="items">
         <div class="item">
             <h3 class="name">Šunka v konzervě</h3>
             <p class="type potravina">Potravina</p>
@@ -30,7 +12,3 @@
                 -koupila to teta<br>
             </span></p>
         </div>
-    </div>
-
-</body>
-</html>

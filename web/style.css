@@ -1,80 +1,104 @@
+* {
+    font-family: "Microsoft YaHei UI Light", serif;
+    color: white;
+}
+
+.app-info {
+    margin: 15px;
+    width: 220px;
+}
+
+.app-info > h1 {
+    color: greenyellow;
+    margin: 0;
+}
+
+.app-info > h2 {
+    color: darkcyan;
+    margin: 0;
+    text-align: right;
+}
+
 body {
     background-color: black;
-    overflow: hidden;
 }
 
-#particles {
-    position: absolute;
-    top: 0;
-    left: 0;
+.items {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.loading-box {
-    width: 150px;
-    height: 150px;
-    padding: 70px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -145px 0 0 -145px;
-    background-color: rgba(0,0,0,0.7);
-    border-radius: 50%;
-    box-shadow: 0 0 30px 30px rgba(0,0,0,0.7);
+.potravina {
+    color: greenyellow;
 }
 
-@keyframes loading-anim {
-    0% {
-        background-color: deepskyblue;
-        box-shadow: 0 0 10px deepskyblue,
-                    0 0 20px deepskyblue,
-                    0 0 40px deepskyblue,
-                    0 0 70px deepskyblue,
-                    0 0 80px deepskyblue,
-                    0 0 120px deepskyblue,
-                    0 0 120px deepskyblue;
-        transform: rotate(0deg);
-    }
-    50% {
-        background-color: deeppink;
-        box-shadow: 0 0 10px deeppink,
-                    0 0 20px deeppink,
-                    0 0 40px deeppink,
-                    0 0 70px deeppink,
-                    0 0 80px deeppink,
-                    0 0 120px deeppink,
-                    0 0 120px deeppink;
-    }
-    100% {
-        background-color: deepskyblue;
-        box-shadow: 0 0 10px deepskyblue,
-                    0 0 20px deepskyblue,
-                    0 0 40px deepskyblue,
-                    0 0 70px deepskyblue,
-                    0 0 80px deepskyblue,
-                    0 0 120px deepskyblue,
-                    0 0 120px deepskyblue;
-        transform: rotate(360deg);
+.produkt {
+    color: greenyellow;
+}
+
+.skladovy-objekt {
+    color: greenyellow;
+}
+
+.item {
+    margin: 15px;
+    width: 320px;
+    border: 2px solid lightgreen;
+    border-radius: 20px;
+    padding: 7px;
+    transition: 0.3s ease-in-out;
+    background-color: rgba(0, 0, 255, 0.17);
+}
+
+@media (hover:hover) {
+    .item:hover {
+        transform: scale(1.1);
+        background-color: rgba(0, 140, 255, 0.31);
+        border-color: cyan;
     }
 }
 
-.loading-dot {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    position: absolute;
-    transform-origin: 75px 75px;
-    background-color: deepskyblue;
-    box-shadow: 0 0 10px deepskyblue,
-                0 0 20px deepskyblue,
-                0 0 40px deepskyblue,
-                0 0 70px deepskyblue,
-                0 0 80px deepskyblue,
-                0 0 120px deepskyblue,
-                0 0 120px deepskyblue;
-    transform: rotate(calc(24deg * (var(--i))));
-    animation-name: loading-anim;
-    animation-delay: calc(0.13333s * (var(--i)) - 2s);
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+.item > * {
+    margin: 0 0 4px 10px;
+    font-size: 18px;
+}
+.name {
+    margin: 0 0 0 8px;
+    font-size: 25px;
+    color: #ffea00;
+}
+.type {
+    font-size: 20px;
+    margin: 0 0 5px 8px;
+}
+.id {
+    color: orangered;
+}
+.pos {
+    color: orange;
+}
+.weight {
+    color: aquamarine;
+}
+.expiration {
+    color: cyan;
+}
+.registration {
+    color: lightgreen;
+}
+.manufacturer {
+    color: blueviolet;
+}
+.notes {
+    color: lightgray;
+}
+.value {
+    color: white;
+    font-size: 22px;
+}
+.date {
+    color: hotpink;
+}
+.no-scale {
+    font-size: 18px;
 }
