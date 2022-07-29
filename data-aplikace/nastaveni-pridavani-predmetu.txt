@@ -1,0 +1,4 @@
+vycistit-poznamky-po-pridani-predmetu: ano
+inkrementovat-ID-po-pridani-predmetu: ano
+vycistit-vse-po-pridani-predmetu: ne
+po-spravnem-zadani-expirace-automaticky-zamerit-dalsi-pole: ano

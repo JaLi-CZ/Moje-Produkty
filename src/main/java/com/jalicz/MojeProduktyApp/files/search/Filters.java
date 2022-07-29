@@ -40,6 +40,7 @@ public class Filters {
     public Filters(String requestCommandFilters) {
         final String[] args = requestCommandFilters.split(FileManager.requestCommandArgumentSeparator);
         for(String arg: args) {
+            if(arg.isEmpty()) continue;
             try {
                 final String key = arg.split("=")[0], value = arg.substring(key.length()+1);
                 switch (key) {

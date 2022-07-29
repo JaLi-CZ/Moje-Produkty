@@ -1,0 +1,3 @@
+<p class="notes">Poznámky:<br><span class="value no-scale">
+                --NOTES--
+            </span></p>

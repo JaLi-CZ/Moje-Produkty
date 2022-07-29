@@ -1,0 +1,1 @@
+<span class="no-scale"> (--FOOD-WEIGHT--g pevný podíl)</span>

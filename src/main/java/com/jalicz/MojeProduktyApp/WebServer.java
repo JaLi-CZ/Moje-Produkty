@@ -2,6 +2,7 @@ package com.jalicz.MojeProduktyApp;
 
 import com.jalicz.MojeProduktyApp.files.FileManager;
 import com.jalicz.MojeProduktyApp.files.Log;
+import com.jalicz.MojeProduktyApp.files.search.response.ResponseBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -29,6 +30,7 @@ public class WebServer {
     }
 
     public void startServer() {
+        ResponseBuilder.updateWebStructure();
         final int port = PortManager.getPort();
         if(port == -1) {
             Log.error("Nelze spustit server - neplatný port. Prosím změňte port v souboru '" + FileManager.serverSettingsFilePath + "' nebo v nastavení serveru.");

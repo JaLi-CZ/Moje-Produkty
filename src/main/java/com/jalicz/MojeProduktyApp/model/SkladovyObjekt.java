@@ -15,6 +15,8 @@ public class SkladovyObjekt extends Produkt {
         notes
      */
 
+    public static SkladovyObjekt root;
+
     public ArrayList<Produkt> items = new ArrayList<>();
     public int totalItemsCount, produktyCount, potravinyCount, skladoveObjektyCount;
     public int totalSubItemsCount, subProduktyCount, subPotravinyCount, subSkladoveObjektyCount;
@@ -26,6 +28,7 @@ public class SkladovyObjekt extends Produkt {
         super(id, name, parentId, weight, null, registration, registrationString, notes, notesString);
 
         this.type = TypeID.SKLADOVY_OBJEKT;
+        if(id == 0) root = this;
     }
 
     // updates all the contained items statistics, even subItems, subSubItems etc.
@@ -39,14 +42,14 @@ public class SkladovyObjekt extends Produkt {
 
         for(Produkt produkt: items) {
             totalItemsCount++;
-            totalItemsWeight += produkt.weight;
+            if(produkt.weight >= 0) totalItemsWeight += produkt.weight;
 
             switch (produkt.type) {
                 case TypeID.PRODUKT -> produktyCount++;
                 case TypeID.POTRAVINA -> {
                     final Potravina potravina = (Potravina) produkt;
                     potravinyCount++;
-                    foodContentWeight += potravina.foodWeight;
+                    if(potravina.foodWeight >= 0) foodContentWeight += potravina.foodWeight;
                 }
                 case TypeID.SKLADOVY_OBJEKT -> {
                     final SkladovyObjekt s = (SkladovyObjekt) produkt;
@@ -68,5 +71,20 @@ public class SkladovyObjekt extends Produkt {
         subSkladoveObjektyCount += skladoveObjektyCount;
         totalSubItemsWeight += totalItemsWeight;
         subFoodContentWeight += foodContentWeight;
+    }
+
+    public static SkladovyObjekt getParentById(int id) {
+        if(id == 0) return root;
+        return find(root, id);
+    }
+
+    private static SkladovyObjekt find(SkladovyObjekt o, int id) {
+        for(Produkt produkt: o.items) {
+            if(produkt.type != TypeID.SKLADOVY_OBJEKT) continue;
+            SkladovyObjekt ob = (SkladovyObjekt) produkt;
+            if(ob.id == id) return ob;
+            return find(ob, id);
+        }
+        return null;
     }
 }

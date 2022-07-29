@@ -3,6 +3,7 @@ package com.jalicz.MojeProduktyApp.files.search;
 import com.jalicz.MojeProduktyApp.GUI.frames.ServerSettingsFrame;
 import com.jalicz.MojeProduktyApp.files.Log;
 import com.jalicz.MojeProduktyApp.files.FileManager;
+import com.jalicz.MojeProduktyApp.files.search.response.SearchResult;
 import com.jalicz.MojeProduktyApp.model.Produkt;
 import com.jalicz.MojeProduktyApp.model.SkladovyObjekt;
 import com.jalicz.MojeProduktyApp.model.TypeID;
@@ -170,5 +171,19 @@ public class SearchEngine {
         final HashMap<String, String> map = FileManager.getAppFileMap(FileManager.serverSettingsFilePath);
         if(map == null) return null;
         return map.getOrDefault(ServerSettingsFrame.password, null);
+    }
+
+    // print's a simple Produkt tree visualization, to check if a tree is build correctly
+    public static void printTree() {
+        if(SkladovyObjekt.root == null) SkladovyObjekt.root = createItemTree(getAllItems());
+        printItem(SkladovyObjekt.root, 0);
+    }
+    private static void printItem(Produkt p, int tabs) {
+        if(p == null) return;
+        System.out.println("-- ".repeat(tabs) + p.name + " #" + p.id + " (" + FileManager.getExtensionByType(p.type) + ")");
+        if(p.type == TypeID.SKLADOVY_OBJEKT) {
+            SkladovyObjekt o = (SkladovyObjekt) p;
+            for(Produkt r: o.items) printItem(r, tabs+1);
+        }
     }
 }

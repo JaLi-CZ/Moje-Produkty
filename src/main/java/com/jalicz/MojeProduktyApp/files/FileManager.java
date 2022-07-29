@@ -34,6 +34,7 @@ public class FileManager {
             databaseFolder = new File("databaze"),
             webFolder = new File("web"),
             appDataFolder = new File("data-aplikace"),
+            webStructure = new File(appDataFolder.getPath() + "/struktura-webu"),
             imagesFolder = new File(appDataFolder.getPath() + "/obrazky");
 
     public static final String
@@ -210,7 +211,7 @@ public class FileManager {
         }
     }
 
-    private static String getExtensionByType(int type) {
+    public static String getExtensionByType(int type) {
         return switch (type) {
             case TypeID.PRODUKT -> produktExtension;
             case TypeID.POTRAVINA -> potravinaExtension;
@@ -418,6 +419,7 @@ public class FileManager {
 
     // return all the files in database folder
     public static File[] getItemFiles() {
+        createIfNotExists(databaseFolder);
         final File[] files = databaseFolder.listFiles();
         if(files == null) {
             Log.error("Něco se pokazilo při získávání souborů ze složky '" + databaseFolder.getPath() + "'.");

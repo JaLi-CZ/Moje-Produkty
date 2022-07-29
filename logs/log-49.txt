@@ -1,0 +1,8 @@
+Tento výpisový soubor byl vytvořen středu 27. července 2022 v 19:12:35
+19:12:35 [Varování]: © 2022 Všechna práva vyhrazena společností jalicz.com!
+19:12:35 [Info]: Spouštím aplikaci "Moje Produkty" (verze 1.1.0)...
+19:12:35 [Info]: Otevírám hlavní okno aplikace...
+19:12:37 [Info]: Spustil jsem webový server na portu '8081'.
+19:12:37 [Chyba]: Něco se pokazilo při zpracovávání filterů '' z dotazovacího příkazu, něco je špatně zapsané.
+- Název chyby: StringIndexOutOfBoundsException
+- Podrobnosti: begin 1, end 0, length 0

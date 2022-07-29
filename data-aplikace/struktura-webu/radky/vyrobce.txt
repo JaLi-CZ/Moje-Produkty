@@ -1,0 +1,1 @@
+<p class="manufacturer">Výrobce: <span class="value">--MANUFACTURER--</span></p>

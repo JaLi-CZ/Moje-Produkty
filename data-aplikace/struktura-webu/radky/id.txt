@@ -1,0 +1,1 @@
+<p class="id">Identifikátor (ID): <span class="value">--id--</span></p>

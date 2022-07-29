@@ -45,8 +45,9 @@ public class SearchRequest {
         boolean filtersExists = false;
         int filtersBegin = 0;
         l:for(String arg: args) {
-            final String key = arg.split("=")[0], value = arg.substring(key.length()+1);
+            if(arg.isEmpty()) continue;
             try {
+                final String key = arg.split("=")[0], value = arg.substring(key.length()+1);
                 switch (key) {
                     case "text" -> text = value;
                     case "order" -> orderId = Integer.parseInt(value);
@@ -67,11 +68,11 @@ public class SearchRequest {
                     }
                     case "psw" -> password = value;
                 }
+                filtersBegin += arg.length() + FileManager.requestCommandArgumentSeparator.length();
             } catch (Exception e) {
                 Log.error("Něco se pokazilo při zpracovávání dotazovacího příkazu '" + requestCommand + "', něco je špatně zapsané v " +
                         "argumentu: '" + arg + "'.", e);
             }
-            filtersBegin += arg.length() + FileManager.requestCommandArgumentSeparator.length();
         }
         if(filtersExists) filters = new Filters(requestCommand.substring(filtersBegin));
     }

@@ -1,4 +1,4 @@
-package com.jalicz.MojeProduktyApp.files.search;
+package com.jalicz.MojeProduktyApp.files.search.response;
 
 import com.jalicz.MojeProduktyApp.model.Produkt;
 import com.jalicz.MojeProduktyApp.response.MPCode;

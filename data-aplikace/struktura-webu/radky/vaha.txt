@@ -1,0 +1,1 @@
+<p class="weight">Váha: <span class="value">--WEIGHT--g--FOOD-WEIGHT-TEXT--</span></p>

@@ -1,14 +1,11 @@
         <div class="item">
-            <h3 class="name">Šunka v konzervě</h3>
-            <p class="type potravina">Potravina</p>
-            <p class="id">Identifikátor (ID): <span class="value">1</span></p>
-            <p class="weight">Váha: <span class="value">200g<span class="no-scale"> (180g pevný podíl)</span></span></p>
-            <p class="pos">Pozice: <span class="value no-scale">Pepův dům > kuchyň > špajz > černá krabice</span></p>
-            <p class="expiration">Projde za 15 dní (<span class="date value">8.8.2022</span>)</p>
-            <p class="manufacturer">Výrobce: <span class="value">Šunkománie</span></p>
-            <p class="registration">Registrováno: <span class="date value">20. 7. 2021</span></p>
-            <p class="notes">Poznámky:<br><span class="value no-scale">
-                -stálo to 5 kč<br>
-                -koupila to teta<br>
-            </span></p>
+            --nazev--
+            --typ--
+            --id--
+            --vaha--
+            --pozice--
+            --expirace--
+            --vyrobce--
+            --registrace--
+            --poznamky--
         </div>

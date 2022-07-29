@@ -1,0 +1,1 @@
+<p class="type --TYPE--">--TYPE-TEXT--</p>

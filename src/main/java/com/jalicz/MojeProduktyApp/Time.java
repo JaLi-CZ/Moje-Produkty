@@ -1,5 +1,6 @@
 package com.jalicz.MojeProduktyApp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Year;
 
@@ -70,5 +71,14 @@ public class Time {
 
     public static boolean isLeapYear(int year) {
         return Year.isLeap(year);
+    }
+
+    public static String dateToWebFormat(LocalDate date) {
+        return date.getDayOfMonth() + "." + date.getMonthValue() + "." + date.getYear();
+    }
+
+    public static String timeToWebFormat(LocalDateTime t) {
+        final int m = t.getMinute(), s = t.getSecond();
+        return t.getDayOfMonth() + "." + t.getMonthValue() + "." + t.getYear() + " - " + t.getHour() + ":" + (m < 10 ? "0"+m:m) + ":" + (s < 10 ? "0"+s:s);
     }
 }
