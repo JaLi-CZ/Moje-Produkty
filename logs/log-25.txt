@@ -1,5 +1,12 @@
-Tento výpisový soubor byl vytvořen neděli 24. července 2022 v 15:26:51
-15:26:51 [Varování]: © 2022 Všechna práva vyhrazena společností jalicz.com!
-15:26:51 [Info]: Spouštím aplikaci "Moje Produkty" (verze 1.1.0)...
-15:26:52 [Info]: Otevírám hlavní okno aplikace...
-15:26:54 [Info]: Spustil jsem webový server na portu '8081'.
+Tento výpisový soubor byl vytvořen sobotu 27. srpna 2022 v 22:33:19
+22:33:19 [Varování]: © 2022 Všechna práva vyhrazena společností jalicz.com!
+22:33:19 [Info]: Spouštím aplikaci "Moje Produkty" (verze 1.1.0)...
+22:33:20 [Info]: Otevírám hlavní okno aplikace...
+22:33:21 [Info]: Spustil jsem webový server na portu '8081'.
+22:33:22 [Info]: Zastavil jsem webový server na portu '8081'.
+22:33:26 [Info]: Spustil jsem webový server na portu '8081'.
+22:33:31 [Info]: Zastavil jsem webový server na portu '8081'.
+22:33:32 [Info]: Spustil jsem webový server na portu '8081'.
+22:33:35 [Info]: Bylo změněno nastavení webového serveru.
+22:33:36 [Info]: Zastavil jsem webový server na portu '8081'.
+22:33:36 [Info]: Spustil jsem webový server na portu '8080'.

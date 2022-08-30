@@ -1,22 +1,6 @@
 * {
-    font-family: "Microsoft YaHei UI Light", serif;
+    font-family: 'Courier New', Courier, monospace;
     color: white;
-}
-
-.app-info {
-    margin: 15px;
-    width: 220px;
-}
-
-.app-info > h1 {
-    color: greenyellow;
-    margin: 0;
-}
-
-.app-info > h2 {
-    color: darkcyan;
-    margin: 0;
-    text-align: right;
 }
 
 body {
@@ -25,80 +9,8 @@ body {
 
 .items {
     display: flex;
-    flex-wrap: wrap;
-}
-
-.potravina {
-    color: greenyellow;
-}
-
-.produkt {
-    color: greenyellow;
-}
-
-.skladovy-objekt {
-    color: greenyellow;
 }
 
 .item {
-    margin: 15px;
-    width: 320px;
-    border: 2px solid lightgreen;
-    border-radius: 20px;
-    padding: 7px;
-    transition: 0.3s ease-in-out;
-    background-color: rgba(0, 0, 255, 0.17);
-}
-
-@media (hover:hover) {
-    .item:hover {
-        transform: scale(1.1);
-        background-color: rgba(0, 140, 255, 0.31);
-        border-color: cyan;
-    }
-}
-
-.item > * {
-    margin: 0 0 4px 10px;
-    font-size: 18px;
-}
-.name {
-    margin: 0 0 0 8px;
-    font-size: 25px;
-    color: #ffea00;
-}
-.type {
-    font-size: 20px;
-    margin: 0 0 5px 8px;
-}
-.id {
-    color: orangered;
-}
-.pos {
-    color: orange;
-}
-.weight {
-    color: aquamarine;
-}
-.expiration {
-    color: cyan;
-}
-.registration {
-    color: lightgreen;
-}
-.manufacturer {
-    color: blueviolet;
-}
-.notes {
-    color: lightgray;
-}
-.value {
-    color: white;
-    font-size: 22px;
-}
-.date {
-    color: hotpink;
-}
-.no-scale {
-    font-size: 18px;
+    width: 350px;
 }
