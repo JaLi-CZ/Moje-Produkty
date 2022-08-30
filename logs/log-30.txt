@@ -1,6 +1,0 @@
-Tento výpisový soubor byl vytvořen pondělí 29. srpna 2022 v 21:34:19
-21:34:19 [Varování]: © 2022 Všechna práva vyhrazena společností jalicz.com!
-21:34:19 [Info]: Spouštím aplikaci "Moje Produkty" (verze 1.1.0)...
-21:34:19 [Info]: Otevírám hlavní okno aplikace...
-21:34:21 [Info]: Spustil jsem webový server na portu '8081'.
-21:34:33 [Info]: Potravina 'test' s ID #888 byla přidán do databáze :).
