@@ -1,0 +1,6 @@
+Tento výpisový soubor byl vytvořen neděli 4. září 2022 v 13:57:19
+13:57:19 [Varování]: © 2022 Všechna práva vyhrazena společností jalicz.com!
+13:57:19 [Info]: Spouštím aplikaci "Moje Produkty" (verze 1.1.0)...
+13:57:20 [Info]: Otevírám hlavní okno aplikace...
+13:57:21 [Info]: Spustil jsem webový server na portu '8080'.
+13:57:27 [Info]: Bylo změněno nastavení webového serveru.
